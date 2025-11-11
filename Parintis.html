@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festival de Parintins: Cultura, Identidade e Variação Linguística</title>
+
+<style>
+ /* ==== FONTES PERSONALIZADAS ==== */
+@font-face {
+  font-family: 'BBB';
+  src: url('bonello/Bonello-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'CCC';
+  src: url('bonello/Bonello-Regular.otf') format('opentype');
+}
+
+/* ====== ESTILO GERAL ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: #ffffff;
+  color: #000000;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ====== HEADER ====== */
+header {
+  background: url('header.jpeg') no-repeat center center/cover;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+header h1, header p { z-index: 2; }
+
+header h1 {
+  font-family: 'BBB', serif;
+  font-size: 3rem;
+  text-shadow: 3px 3px 8px rgba(0,0,0,0.6);
+  letter-spacing: 2px;
+}
+
+header p {
+  font-family: 'BBB', sans-serif;
+  font-size: 1.3rem;
+  margin-top: 15px;
+  letter-spacing: 1px;
+}
+
+/* ====== NAVEGAÇÃO ====== */
+nav {
+   background: linear-gradient(135deg, #0a2342, #b01e1e);
+  color: white;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-family: 'BBB', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  transition: color 0.3s, transform 0.2s;
+}
+
+nav a:hover {
+  color: #ffd9d9;
+  transform: scale(1.1);
+}
+
+/* ====== SEÇÕES ====== */
+section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  animation: fadeIn 1s ease;
+}
+
+section h2 {
+  color: #b01e1e;
+  font-family: 'CCC', serif;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+section p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  text-align: justify;
+  margin-bottom: 25px;
+}
+
+/* ====== VÍDEOS ====== */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 30px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.video-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.video-box h3 {
+  text-align: center;
+  color: #b01e1e;
+  font-family: 'CCC', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* ====== VOCABULÁRIO ====== */
+.vocab-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.vocab-word {
+   background: linear-gradient(135deg, #0a2342, #b01e1e);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 1.1rem;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.vocab-word:hover {
+  background: linear-gradient(135deg, #b01e1e, #0a2342);
+  transform: scale(1.05);
+}
+
+/* ====== MODAL ====== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 90%;
+  width: 400px;
+  text-align: center;
+  animation: scaleIn 0.3s ease;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  background: #b01e1e;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'CCC', sans-serif;
+  transition: 0.3s;
+}
+
+.close-btn:hover { background: #8b1717; }
+
+/* ====== GALERIA ====== */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card:hover { transform: translateY(-5px); }
+.card img { width: 100%; height: 200px; object-fit: cover; }
+.legenda { padding: 15px; font-size: 0.95rem; color: #333; }
+
+/* ====== JOGO 1: BATALHA ====== */
+.game-container { text-align: center; margin-top: 50px; }
+.bois { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.boi { cursor: pointer; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+.boi:hover { transform: scale(1.05); }
+.boi img { width: 200px; height: 200px; object-fit: cover; }
+.result { margin-top: 25px; font-size: 1.4rem; font-family: 'BBB', serif; color: #b01e1e; animation: fadeIn 0.4s ease; }
+
+/* ====== JOGO 2: MEMÓRIA ====== */
+.memory-game {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  justify-content: center;
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+.memory-card {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.memory-card.flip { transform: rotateY(180deg); }
+
+.front-face, .back-face {
+  position: absolute;
+  width: 100%; height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  object-fit: cover;
+}
+
+.front-face { transform: rotateY(180deg); }
+
+.back-face {
+  background: linear-gradient(135deg, #0a2342, #b01e1e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'CCC', sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* ====== RODAPÉ ====== */
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  font-family: 'CCC', sans-serif;
+}
+
+/* ====== ANIMAÇÕES ====== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0;}
+  to { transform: scale(1); opacity: 1;}
+}
+
+/* ====== RESPONSIVO ====== */
+@media (max-width: 768px) {
+  header h1 { font-size: 2rem; }
+}
+</style>
+</head>
+
+<body>
+  <header>
+    <h1>Festival de Parintins: Cultura, Identidade e Variação Linguística</h1>
+    <p>A magia do Boi-Bumbá e a força da linguagem amazônica</p>
+  </header>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#vocabulario">Vocabulário</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#jogo">Jogos</a>
+    <a href="#identidade">Identidade</a>
+  </nav>
+
+  <section id="sobre">
+    <h2>O que é o Festival de Parintins?</h2>
+    <p>O Festival de Parintins é uma das maiores manifestações culturais do Brasil. Realizado anualmente no Amazonas, ele reúne dança, música, teatro, lendas e tradições da Amazônia na disputa entre os bois-bumbás <strong>Garantido</strong> (vermelho) e <strong>Caprichoso</strong> (azul).</p>
+
+    <div class="video-container">
+      <iframe src="Video.mp4" title="Festival de Parintins" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+
+  </section>
+
+   <section id="identidade">
+    <h2>O Vocabulário e a Identidade Cultural</h2>
+    <p>A análise dos substantivos e adjetivos regionais usados no Festival de Parintins mostra que a língua está profundamente ligada à cultura.
+Dentro do festival, palavras comuns ganham significados específicos que reforçam identidade, pertencimento e tradição.
+</p>
+    <p>Fora desse contexto, esses termos assumem novos sentidos, evidenciando a riqueza da variação linguística no Brasil.
+Entender essa relação ajuda a reconhecer a diversidade cultural do país e o papel da linguagem na construção de identidades.</p>
+  </section>
+
+  <section id="vocabulario">
+    <h2>Vocabulário do Festival</h2>
+    <div class="vocab-list">
+      <div class="vocab-word" data-img="17.15.01(2).jpeg" data-desc="No festival: personagem feminina que simboliza a “mulher mais bela da tribo”.
+Fora do festival: sinônimo regional de mulher bonita; pouco usado fora do estado.
+Imagem:Cunhã-poranga do boi caprichoso, Marciele Albuquerque (fonte: g1.globo)">Cunhã-Poranga do Boi Caprichoso</div>
+       <div class="vocab-word" data-img="17.15.02.jpeg" data-desc="No festival: personagem feminina que simboliza a “mulher mais bela da tribo”.
+Fora do festival: sinônimo regional de mulher bonita; pouco usado fora do estado. Imagem: Cunhã-poranga do boi garantido, Isabelle Nogueira, ex-participante do BBB 24 (fonte: g1.globo)">Cunhã-Poranga do Boi Garantido</div>
+      <div class="vocab-word" data-img="17.15.01.jpeg" data-desc="No festival: grupo oficial de percussão do boi vermelho; marca rítmica característica.
+Fora do festival: batucada é roda de samba ou grupo de percussão comum.
+ Imagem: Batucada, em um dos seus ensaios shows torcida do boi garantido (fonte: G1.globo)">Batucada</div>
+      <div class="vocab-word" data-img="17.15.01(1).jpeg" data-desc="No festival: grupo rítmico oficial do boi azul, responsável pelo andamento musical.
+Fora do festival: significa conjunto de marinheiros; uso raro atualmente.
+ Imagem: Marujada em um dos seus ensaios, torcida do boi caprichoso (fonte: Portaldafloresta.com.br)">Marujada</div>
+      <div class="vocab-word" data-img="17.15.02(1).jpeg" data-desc="No festival: narrador tradicional que comanda a história, anima o público e conduz as cenas.
+Fora do festival: termo folclórico antigo ligado a antigos donos das fazendas onde surgiram os bois.
+ Imagem: Amos do boi dos bois caprichoso e garantido, Caetano Medeiros e João Faria (fonte: visitemanaus.com.br)">Amo do Boi</div>
+      <div class="vocab-word" data-img="17.15.0(2).jpeg" data-desc="No festival: cantor principal de cada boi, responsável por iniciar e conduzir as músicas.
+Fora do festival: expressão praticamente inexistente; usada apenas no folclore do boi-bumbá.
+ Imagem: Levantadores de toadas dos bois caprichoso e garantido, Patrick Araújo e David Assayag (fonte: visitemanaus.com)">Levantador de Toadas</div>
+      <div class="vocab-word" data-img="17.20.38.jpeg" data-desc="No festival: apresentações coreografadas que representam povos indígenas de maneira artística.
+Fora do festival: expressão inexistente; não é usada em outros espetáculos.
+ Imagem: Tribo show, participações de comunidades indígenas durante o festival (fonte: g1.globo)">Tribo-Show</div>
+      <div class="vocab-word" data-img="17.25.46.jpeg" data-desc="No festival: representação de crianças indígenas dentro da encenação.
+Fora do festival: no Norte significa “criança”; no restante do país é pouco utilizado.
+ Imagem: Curumim, a representação de crianças nas apresentações sobre a cultura indígena (fonte:cnnbrasil.com.br)">Curumim</div>
+     <div class="vocab-word" data-img="17.34.05.jpeg" data-desc="No festival: materiais naturais usados em figurinos, cestarias e adereços das tribos e personagens.
+Fora do festival: nomes regionais de plantas e fibras amazônicas; conhecidos principalmente por artesãos locais.Imagem: Buriti, jupati e arumã são materiais utilizados na convecção dos artesanatos típicos da região de Parintins e muito utilizados nos figurinos e adereços (Fonte: https://www.fva.org.br)">Buriti / Jupati / Arumã</div>
+     <div class="vocab-word" data-img="17.19.04.jpeg" data-desc="No festival: personagem feminina que representa a elite rural e o enredo histórico da fazenda.
+Fora do festival: termo associado ao período colonial; aparece apenas em contextos literários ou folclóricos.Imagem:Sinhazinhas da fazenda, dos bois caprichoso e garantido, Valentina Cid e Valentina Coimbra (fonte: visitemanaus.com)">Sinhazinha da Fazenda</div>
+   
+    <div class="vocab-word" data-img="17.40.04.jpeg" data-desc="No festival: participante da apresentação (dançarinos, personagens, levantadores).
+Fora do festival: pessoa que participa de manifestações folclóricas em geral.Imagem:Brincantes são os participantes do evento em si, sejam os telespectadores ou dançarinos, apresentadores (fonte: https://agenciacenarium.com.br)">Brincante</div>
+  
+    <div class="vocab-word" data-img="17.40.04(1).jpeg" data-desc="No festival: torcedor ou integrante do boi rival.
+Fora do festival: opositor, adversário, alguém que discorda.Imagem:Contrário é o torcedor rival de cada boi, ou seja, o garantido é contrário do caprichoso e vice-versa (fonte: https://www.amazonasemais.com.br)">Contrário</div>
+  
+     </div>
+  </section>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="">
+      <p id="modal-desc"></p>
+      <button class="close-btn" id="closeModal">Fechar</button>
+    </div>
+  </div>
+
+  <section id="galeria">
+    <h2>A Cidade se Transforma</h2>
+    <div class="galeria">
+      <div class="card"><img src="as.jpeg"><div class="legenda">Durante o Festival, a Ilha Tupinambarana muda completamente...</div></div>
+      <div class="card"><img src="fd.jpeg"><div class="legenda">Os bois trabalham o ano inteiro em grandes galpões...</div></div>
+      <div class="card"><img src="ui.jpeg"><div class="legenda">Cada apresentação reforça a identidade cultural amazônica.</div></div>
+      <div class="card"><img src="re.jpeg"><div class="legenda">Garantido e Caprichoso competem em um duelo artístico.</div></div>
+      <div class="card"><img src="iu.jpeg"><div class="legenda">As torcidas oficiais, chamadas galeras, são parte fundamental...</div></div>
+      <div class="card"><img src="ih.jpeg"><div class="legenda">As alegorias atingem dezenas de metros, com iluminação e robótica.</div></div>
+    </div>
+  </section>
+
+  <section id="jogo">
+    <h2>🎮 Jogos do Festival</h2>
+
+    <div class="game-container">
+      <h3>Batalha dos Bois</h3>
+      <p>Escolha o seu boi favorito e veja quem vence a disputa simbólica!</p>
+      <div class="bois">
+        <div class="boi" id="caprichoso"><img src="painel_festa_junina_em_eva_bumba_meu_boi_caprichoso_106994_1_19610bbae8499dec0ac5aec86c634158.webp"></div>
+        <div class="boi" id="garantido"><img src="1_G_Painel-EVA-Boi-Garantido-Junino-Piffer_10.jpg"></div>
+      </div>
+      <div class="result" id="result"></div>
+    </div>
+
+    <div class="memory">
+      <h3>🧠 Jogo da Memória dos Bois</h3>
+      <p>Encontre os pares de imagens do Festival!</p>
+      <div class="memory-game" id="memoryGame"></div>
+    </div>
+  </section>
+
+ 
+
+  <footer>
+    <p>© 2025 — Festival de Parintins: Cultura e Linguagem | Trabalho Escolar sem fins lucrativos feito por alunos da Etec | </p>
+  </footer>
+
+  <script>
+    // Scroll suave
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Modal vocabulário
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalDesc = document.getElementById('modal-desc');
+    const closeModal = document.getElementById('closeModal');
+    document.querySelectorAll('.vocab-word').forEach(word => {
+      word.addEventListener('click', () => {
+        modalImg.src = word.dataset.img;
+        modalDesc.textContent = word.dataset.desc;
+        modal.style.display = 'flex';
+      });
+    });
+    closeModal.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+
+    // Batalha dos Bois
+    const result = document.getElementById('result');
+    const bois = ['Garantido', 'Caprichoso'];
+    document.getElementById('garantido').onclick = () => battle('Garantido');
+    document.getElementById('caprichoso').onclick = () => battle('Caprichoso');
+    function battle(choice) {
+      const winner = bois[Math.floor(Math.random() * bois.length)];
+      result.textContent = winner === choice ? `🎉 ${choice} venceu a batalha!` : `😢 ${winner} levou a melhor dessa vez!`;
+    }
+
+    // ==== JOGO DA MEMÓRIA ====
+    const cardsData = [
+      "aas.jpeg",
+      "dss.jpeg",
+      "few.jpeg",
+      "res.jpeg",
+    ];
+    const gameBoard = document.getElementById('memoryGame');
+    let cards = [...cardsData, ...cardsData].sort(() => 0.5 - Math.random());
+    let flipped = [], lock = false;
+
+    cards.forEach(src => {
+      const card = document.createElement('div');
+      card.classList.add('memory-card');
+      card.innerHTML = `
+        <img src="${src}" class="front-face">
+        <div class="back-face">Boi!</div>
+      `;
+      card.addEventListener('click', () => flip(card, src));
+      gameBoard.appendChild(card);
+    });
+
+    function flip(card, src) {
+      if (lock || card.classList.contains('flip')) return;
+      card.classList.add('flip');
+      flipped.push({ card, src });
+
+      if (flipped.length === 2) {
+        lock = true;
+        if (flipped[0].src === flipped[1].src) {
+          flipped = [];
+          lock = false;
+        } else {
+          setTimeout(() => {
+            flipped.forEach(c => c.card.classList.remove('flip'));
+            flipped = [];
+            lock = false;
+          }, 1000);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
